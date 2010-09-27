@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.googlecode.wiimotemouse</groupId>
+    <artifactId>WiimoteMouse</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1-SNAPSHOT</version>
+    <name>WiimoteMouse</name>
+    <url>http://maven.apache.org</url>
+
+    <build>
+        <finalName>WiimoteMouse</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                 <artifactId>maven-jar-plugin</artifactId>
+                 <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>com.googlecode.wiimotemouse.WiimoteMouse</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.2.3-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <onejarVersion>0.97-SNAPSHOT</onejarVersion>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>org.jvnet.wagon-svn</groupId>
+                <artifactId>wagon-svn</artifactId>
+                <version>1.9</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <!-- repositories -->
+    <repositories>
+        <repository>
+            <id>repo1.maven.org</id>
+            <name>Main Maven Repository</name>
+            <url>http://repo1.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven2-repository.dev.java.net</id>
+            <name>Java.net Repository for Maven</name>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+        <repository>
+            <id>ilrt-maven-repo</id>
+            <url>http://maven.ilrt.bris.ac.uk/</url>
+        </repository>
+        <repository>
+           <id>maven-restlet</id>
+           <name>Public online Restlet repository</name>
+           <url>http://maven.restlet.org</url>
+           <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>manchester.repo</id>
+            <url>http://memetic.ag.manchester.ac.uk:8081/nexus/content/repositories/manchester.repo/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>wiiusej</groupId>
+            <artifactId>wiiusej</artifactId>
+            <version>0.12b</version>
+        </dependency>
+    </dependencies>
+
+    <developers>
+        <developer>
+            <name>Andrew Rowley</name>
+            <email>Andrew.Rowley@manchester.ac.uk</email>
+            <organization>University of Manchester</organization>
+            <organizationUrl>http://www.rcs.manchester.ac.uk</organizationUrl>
+        </developer>
+    </developers>
+</project>
